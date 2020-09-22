@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Группы</title>
+    <style type="text/css">
+        h1{
+            font: 24px arial;
+        }
+        body {
+            padding: 20px;
+        }
+        table {
+            width: 400px;
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        }
+         th, td {
+             width: auto;
+             height: 28px;
+            border: 1px solid #999; /* Граница между ячейками */
+            font-weight: normal;
+            font: 14px arial;
+             text-align: center;
+        }
+
+        thead {
+            background: #e5e5e5; /* Цвет фона строки заголовка */
+        }
+    </style>
+</head>
+<body>
+<h1>Группы университета ScaleApps</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Номер</th>
+        <th>Количество студентов</th>
+        <th>Действия</th>
+    </tr>
+    <tbody>
+    <tr th:each="groups : ${sGroups}">
+        <td th:text="${groups.groupnumber}">15-13</td>
+        <td th:text="${groups.quantity}">John Doe</td>
+        <td>
+            <a th:href="@{/edit(sGroup=${groups.groupnumber})}" href="edit.html">Edit</a>
+        </td>
+    </tr>
+    </tbody>
+    </thead>
+
+</table>
+
+<form method="post">
+    <p><input type = "text" name="text" placeholder="Номер группы" /></p>
+    <p><button type="submit">Добавить новую группу</button></p>
+</form>
+</body>
+</html>
