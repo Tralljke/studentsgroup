@@ -1,36 +1,30 @@
  $( document ).on('click','a',function(a) {
-//     $( document ).ready(function() {
-    // SUBMIT FORM
 
             ajaxPost();
 
     function ajaxPost(){
-        var customerId = a.target.id;
+        var personId = a.target.id;
         var formData = {
              id : a.target.id,
             groupNumber :  $("#th-z").text()
-
         }
 
-        // DO POST
         $.ajax({
             type : "DELETE",
             contentType : "application/json",
-            url : "api/customer/delete/" + customerId,
+            url : "api/person/delete/" + personId,
             data : JSON.stringify(formData),
             dataType : 'json',
             success : function(result) {
                 if(result.status == "Done"){
                     $('#studentstable tbody').empty();
 
-                    $.each(result.data, function(i, customer){
-                        var customer = "<tr><td>" + customer.data + "</td> + <td>" + customer.name + "</td> " +
-                            "<td><a id= " + customer.id + "> " + "Delete" + "</a></td></tr> ";
-                        $("#studentstable").append(customer)
+                    $.each(result.data, function(i, student){
+                        var student = "<tr><td>" + student.data + "</td> + <td>" + student.name + "</td> " +
+                            "<td><a id= " + student.id + "> " + "Delete" + "</a></td></tr> ";
+                        $("#studentstable").append(student)
                     });
                     console.log("Success: ", result);
-                }else{
-                    $("#postResultDiv").html("<strong>Error</strong>");
                 }
                 console.log(result);
             },
@@ -40,12 +34,11 @@
             }
         });
 
-        // Reset FormData after Posting
         resetData();
 
     }
 
     function resetData(){
-        customerId = "";
+        personId = "";
     }
 })

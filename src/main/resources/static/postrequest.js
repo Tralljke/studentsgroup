@@ -1,8 +1,7 @@
 $( document ).ready(function() {
 
-    // SUBMIT FORM
-    $("#customerForm").submit(function(event) {
-        // Prevent the form from submitting via the browser.
+
+    $("#studentForm").submit(function(event) {
         event.preventDefault();
         ajaxPost();
     });
@@ -10,7 +9,6 @@ $( document ).ready(function() {
 
     function ajaxPost(){
 
-        // PREPARE FORM DATA
         var formData = {
 
             name : $("#firstname").val(),
@@ -18,25 +16,22 @@ $( document ).ready(function() {
 
         }
 
-        // DO POST
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : "api/customer/save",
+            url : "api/person/save",
             data : JSON.stringify(formData),
             dataType : 'json',
             success : function(result) {
                 if(result.status == "Done"){
                     $('#studentstable tbody').empty();
 
-                    $.each(result.data, function(i, customer){
-                        var customer = "<tr><td>" + customer.data + "</td> + <td>" + customer.name + "</td> " +
-                            "<td><a id= " + customer.id + "> " + "Delete" + "</a></td></tr> ";
-                        $("#studentstable").append(customer)
+                    $.each(result.data, function(i, student){
+                        var student = "<tr><td>" + student.data + "</td> + <td>" + student.name + "</td> " +
+                            "<td><a id= " + student.id + "> " + "Delete" + "</a></td></tr> ";
+                        $("#studentstable").append(student)
                     });
                     console.log("Success: ", result);
-                }else{
-                    $("#postResultDiv").html("<strong>Error</strong>");
                 }
                 console.log(result);
             },
@@ -46,7 +41,6 @@ $( document ).ready(function() {
             }
         });
 
-        // Reset FormData after Posting
         resetData();
 
     }
