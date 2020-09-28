@@ -1,10 +1,5 @@
-package com.testwebapp.studentsgroup.domain;
-import com.sun.istack.NotNull;
-import com.testwebapp.studentsgroup.domain.Person;
+package com.petrbel.studentsgroup.domain;
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 public class StudentsGroup {
@@ -12,43 +7,50 @@ public class StudentsGroup {
     @Id
     @GeneratedValue
     private int id;
-    @NotNull
-    private String groupnumber;
-    @NotNull
+    private String groupNumber;
     private long quantity;
-
 
     public StudentsGroup()
     {
 
     }
 
-
-    public StudentsGroup(String groupnumber, long quantity) {
-        this.groupnumber = groupnumber;
+    public StudentsGroup(String groupNumber, long quantity) {
+        this.groupNumber = groupNumber;
         this.quantity = quantity;
     }
-    public String getGroupnumber(){
-        return groupnumber;
+
+    public String getGroupNumber(){
+        return groupNumber;
     }
-    public void setGroupnumber(String groupnumber){
-        this.groupnumber = groupnumber;
+
+    public void setGroupNumber(String groupNumber){
+        this.groupNumber = groupNumber;
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public long getQuantity() {
         return quantity;
     }
+
     public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
+
     public void addQuantity()
     {
         this.quantity = this.quantity + 1;
     }
 
+    public void deductQuantity()
+    {
+        this.quantity = this.quantity - 1;
+    }
 }

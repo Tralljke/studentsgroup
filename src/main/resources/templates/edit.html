@@ -1,63 +1,52 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
+
+</body>
+</html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Группа №</title>
-    <style type="text/css">
-        h1{
-            font: 24px arial;
-        }
-        body {
-            padding: 20px;
-        }
-        table {
-            width: 400px;
-            border-collapse: collapse; /* Убираем двойные линии между ячейками */
-        }
-        th, td {
-            width: auto;
-            height: 28px;
-            border: 1px solid #999; /* Граница между ячейками */
-            font-weight: normal;
-            font: 14px arial;
-            text-align: center;
-        }
-
-        thead {
-            background: #e5e5e5; /* Цвет фона строки заголовка */
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Группа</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/postrequest.js"></script>
+    <script src="/deleterequest.js"></script>
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-<h1>Группа № <span th:text="${groupNum}"></span> </h1>
+<h1>Группа № <span id="th-z" th:text="${gNum}"></span> </h1>
 
-<table>
-    <thead>
-    <tr>
-        <th>Дата принятия</th>
-        <th>ФИО студента</th>
-        <th>Действия</th>
-    </tr>
-    <tbody>
+        <div id="getResultDiv" >
+            <table id="studentstable">
+                <thead>
+                    <tr>
+                    <th>Дата принятия</th>
+                    <th>ФИО студента</th>
+                    <th>Действия</th>
+                    </tr>
+                <tbody>
+                <tr th:each="persons : ${person}">
+                    <td th:text="${persons.data}">20.09.2020</td>
+                    <td th:text="${persons.name}">Иван Иванович</td>
+                    <td th:value="${persons.id}">
+                        <a th:onclick="" th:id="${persons.id}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+                </thead>
+            </table>
+        </div>
 
-    <tr th:each="persons : ${person}">
-        <td th:text="${persons.data}">20.09.2020</td>
-        <td th:text="${persons.name}">Иван Иванович</td>
-        <td>
-            <a th:href="@{/edit(id=${persons.id})}" href="edit.html">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-    </thead>
+            <form id="customerForm" class="customerForm">
+                <p><input autocomplete="off" type="text" id="firstname" placeholder="ФИО"/></p>
+                <p><button type="submit" >Принять нового студента</button></p>
+            </form>
 
-</table>
+            <form action="/" class="back-form">
+                <button>Вернуться к списку групп</button>
+            </form>
 
-<form  method="post" >
-    <p><input type = "text" name="text" placeholder="ФИО" /></p>
-    <p><button type="submit">Принять нового студента</button></p>
-</form>
-<form method="get">
-    <p><button type="button">Вернуться к списку групп</button></p>
-</form>
+</div>
 </body>
 </html>

@@ -1,59 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Группы</title>
-    <style type="text/css">
-        h1{
-            font: 24px arial;
-        }
-        body {
-            padding: 20px;
-        }
-        table {
-            width: 400px;
-            border-collapse: collapse; /* Убираем двойные линии между ячейками */
-        }
-         th, td {
-             width: auto;
-             height: 28px;
-            border: 1px solid #999; /* Граница между ячейками */
-            font-weight: normal;
-            font: 14px arial;
-             text-align: center;
-        }
+    <head>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous"></link>
+        <link href="styles.css" rel="stylesheet">
+        <meta charset="UTF-8"/>
+        <title>Группы</title>
+    </head>
+    <body>
+        <h1>Группы университета ScaleApps</h1>
 
-        thead {
-            background: #e5e5e5; /* Цвет фона строки заголовка */
-        }
-    </style>
-</head>
-<body>
-<h1>Группы университета ScaleApps</h1>
+        <table >
+            <thead>
+            <tr>
+                <th>Номер</th>
+                <th>Количество студентов</th>
+                <th>Действия</th>
+            </tr>
+            <tbody>
+            <tr th:each="groups : ${sGroups}">
+                <td th:text="${groups.groupNumber}">15-13</td>
+                <td th:text="${groups.quantity}">John Doe</td>
+                <td>
+                    <a th:href="@{/edit(groupNumber=${groups.groupNumber})}" href="edit.html">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+            </thead>
 
-<table>
-    <thead>
-    <tr>
-        <th>Номер</th>
-        <th>Количество студентов</th>
-        <th>Действия</th>
-    </tr>
-    <tbody>
-    <tr th:each="groups : ${sGroups}">
-        <td th:text="${groups.groupnumber}">15-13</td>
-        <td th:text="${groups.quantity}">John Doe</td>
-        <td>
-            <a th:href="@{/edit(sGroup=${groups.groupnumber})}" href="edit.html">Edit</a>
-        </td>
-    </tr>
-    </tbody>
-    </thead>
+        </table>
 
-</table>
 
-<form method="post">
-    <p><input type = "text" name="text" placeholder="Номер группы" /></p>
-    <p><button type="submit">Добавить новую группу</button></p>
-</form>
-</body>
+        <div th:if="${totalPages > 0}"
+             class="form-group col-md-11 pagination-centered">
+            <ul class="pagination">
+                <li th:class="${currentPageNumber == 0} ? disabled"><a
+                        class="pageLink"
+                        th:href="@{/(page=0)}">«</a>
+                </li>
+                <li th:class="${currentPageNumber == 0} ? disabled"><a
+                        class="pageLink"
+                        th:href="@{/(page=${currentPageNumber}-1)}">←</a>
+                </li>
+                <li
+                        th:class="${page == (currentPageNumber)} ? disabled"
+                        th:each="page : ${pages}">
+                    <a class="pageLink"
+                       th:href="@{/(page=${pages[page]})}"
+                       th:text="${pages[page]}+1"></a>
+                </li>
+                <li
+                        th:class="${currentPageNumber + 1 == totalPages} ? disabled">
+                    <a class="pageLink"
+                       th:href="@{/(page=${currentPageNumber + 1})}">→</a>
+                </li>
+                <li
+                        th:class="${currentPageNumber + 1  == totalPages} ? disabled">
+                    <a class="pageLink"
+                       th:href="@{/(page=${totalPages}-1)}">»</a>
+                </li>
+            </ul>
+        </div>
+
+        <form method="post" id="add-form" class="add-form">
+            <p><input autocomplete="off" type = "text" name="groupNumber" id="groupName" placeholder="Номер группы" /></p>
+            <p><button type="submit" id="btn-add">Добавить новую группу</button></p>
+            <p th:text="${message}"></p>
+        </form>
+
+    </body>
 </html>

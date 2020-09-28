@@ -1,0 +1,51 @@
+h1{
+    font: 24px arial;
+}
+input, button{
+    width: 184px;
+    height: 30px;
+}
+
+body {
+    padding: 20px;
+}
+table {
+    width: 400px;
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+}
+th, td {
+    width: auto;
+    height: 28px;
+    border: 1px solid #999; /* Граница между ячейками */
+    font-weight: normal;
+    font: 14px arial;
+    text-align: center;
+}
+
+thead {
+    background: #e5e5e5; /* Цвет фона строки заголовка */
+}
+div.pagination
+{
+    display: inline; /* Отображать как строчный элемент */
+}
+
+.pagination-centered {
+    width: 400px;
+    display: inline; /* Отображать как строчный элемент */
+
+}
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+.pointer-disabled {
+    pointer-events: none;
+}
+.add-form{
+    width: 400px;
+}
+.customerForm, .back-form{
+    padding-top: 25px;
+    width: 400px;
+}
